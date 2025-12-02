@@ -10,18 +10,22 @@ from datetime import datetime
 import paho.mqtt.client as mqtt 
 import mysql.connector 
 from mysql.connector import pooling 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
  
 # Konfiguraatio 
 MQTT_BROKER = "localhost" 
 MQTT_PORT = 1883 
 MQTT_TOPIC = "chat/messages" 
  
-DB_CONFIG = { 
-    "host": "localhost", 
-    "user": "mqtt_user", 
-    "password": "salasana123",  # Vaihda! 
-    "database": "mqtt_chat" 
-} 
+DB_CONFIG = {
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME")
+}
  
 # Lokitus 
 logging.basicConfig( 
